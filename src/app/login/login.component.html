@@ -1,0 +1,44 @@
+<form class="form col-md-4 col-md-offset-4" #loginForm="ngForm" (ngSubmit)="OnSave(loginForm.value)">
+    <div class="form-group text-center">
+        <img src="assets/Admin.png" class="img-circle">
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-envelope"></span>
+            </div>
+            <input type="email" name="email" required 
+            pattern="[a-zA-Z0-9]{3,}[@]{1}[a-zA-Z]{3,}[.]{1}[a-zA-Z0-9]{2,}"
+            #email="ngModel" [(ngModel)]="logForm.email" class="form-control" placeholder="Email">
+        </div>
+        <div class="alert alert-danger" *ngIf="email.errors?.pattern && (email.touched || email.dirty)">
+            Invalid Email
+        </div>
+        <div *ngIf="email.errors?.required && (email.touched || email.dirty)"  class="alert alert-danger">
+            This Field Is Required
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-eye-close"></span>
+            </div>
+            <input type="password" name="password"
+            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,10}$"
+             #password="ngModel" [(ngModel)]="logForm.password" class="form-control" placeholder="Password">
+        </div>
+        <div class="alert alert-danger" *ngIf="password.errors?.pattern">
+            Password Contain At Least 2 Uppercase , 1 Lowwer Case , 2 Digits , 2 Special Char
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <button type="reset" class="btn btn-danger pull-left">Cancel&nbsp;&nbsp;
+            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </button>
+        <a href="#">Forget Password</a>
+        <button type="submit" class="btn btn-success pull-right">Login&nbsp;&nbsp;
+            <span class="glyphicon glyphicon-ok-circle"></span>
+        </button>
+    </div>
+</form>

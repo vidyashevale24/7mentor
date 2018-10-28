@@ -1,0 +1,115 @@
+
+<form class="form col-md-4 col-md-offset-4" [formGroup]="registerForm" (ngSubmit)="OnSave(registerForm.value)">
+ 
+    <div id="msg" *ngIf="res" class="alert alert-{{res.class}}">
+        {{res.msg}}
+        {{res.error}}
+    </div>
+    <div class="form-group text-center">
+        <img src="./assets/Admin.png" class="img-circle">
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-user"></span>
+            </div>
+            <input type="text" [formControl]="registerForm.controls.name" class="form-control" placeholder="Name">
+        </div>
+        <div class="alert alert-danger" *ngIf="registerForm.controls['name'].errors?.pattern && 
+        (registerForm.controls['name'].touched || registerForm.controls['name'].dirty) && registerForm.submitted">
+            Only Char and Space Allow
+        </div>
+
+        <div class="alert alert-danger" *ngIf="registerForm.controls['name'].errors?.required && 
+        (registerForm.controls['name'].touched || registerForm.controls['name'].dirty)">
+            Name Required
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-envelope"></span>
+            </div>
+            <input type="email" [formControl]="registerForm.controls.email" class="form-control" placeholder="Email">
+        </div>
+        <div class="alert alert-danger" *ngIf="registerForm.controls['email'].errors?.pattern && 
+        (registerForm.controls['email'].touched || registerForm.controls['email'].dirty)">
+            invalid Email
+        </div>
+
+        <div class="alert alert-danger" *ngIf="registerForm.controls['email'].errors?.required && 
+        (registerForm.controls['email'].touched || registerForm.controls['email'].dirty)">
+            email Required
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-phone"></span>
+            </div>
+            <input type="text" [formControl]="registerForm.controls.mobile" class="form-control" placeholder="Mobile">
+        </div>
+        <div class="alert alert-danger" *ngIf="registerForm.controls['mobile'].errors?.pattern && 
+        (registerForm.controls['mobile'].touched || registerForm.controls['mobile'].dirty)">
+            Only Digits Allow length 10
+        </div>
+
+        <div class="alert alert-danger" *ngIf="registerForm.controls['mobile'].errors?.required && 
+        (registerForm.controls['mobile'].touched || registerForm.controls['mobile'].dirty)">
+            Mobile Required
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-eye-close"></span>
+            </div>
+            <input type="password" [formControl]="registerForm.controls.password" class="form-control" placeholder="Password">
+        </div>
+
+        <div class="alert alert-danger" *ngIf="registerForm.controls['password'].errors?.pattern && 
+      (registerForm.controls['password'].touched || registerForm.controls['password'].dirty)">
+            Password Contain Pattern
+        </div>
+
+        <div class="alert alert-danger" *ngIf="registerForm.controls['password'].errors?.required && 
+      (registerForm.controls['password'].touched || registerForm.controls['password'].dirty)">
+            Password Required
+        </div>
+
+    </div>
+    <div class="form-group" *ngIf="id">
+        <select class="form-control select" [formControl]="registerForm.controls['status']">
+            <option value="0">Active</option>
+            <option value="1">Inactive</option>
+        </select>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <input class="form-control" [formControl]="registerForm.controls['address'].controls['city']" placeholder="City">
+            <div class="alert alert-danger"
+            *ngIf="registerForm.controls['address'].controls['city'].errors?.required &&
+            (registerForm.controls['address'].controls['city'].touched || registerForm.controls['address'].controls['city'].dirty)">
+                City Is Required
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <input class="form-control" [formControl]="registerForm.controls['address'].controls['state']" placeholder="State">
+            <div class="alert alert-danger"
+            *ngIf="registerForm.controls['address'].controls['state'].errors?.required &&
+            (registerForm.controls['address'].controls['state'].touched || registerForm.controls['address'].controls['state'].dirty)">
+                State Is Required
+            </div>
+        </div>
+    </div>
+    <input *ngIf="id" name="id" [formControl]="registerForm.controls['id']" type="hidden">
+    <div class="form-group text-center">
+        <button type="reset" class="btn btn-danger pull-left">Cancel&nbsp;&nbsp;
+            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </button>
+        <a href="#">Forget Password</a>
+        <button type="submit" class="btn btn-success pull-right" >{{btn}}&nbsp;&nbsp;
+            <span class="glyphicon glyphicon-ok-circle"></span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,39 @@
+<div id="msg" *ngIf="res" class="alert alert-{{res.class}}">
+  {{res.msg}}
+  {{res.error}}
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Mobile</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user['name'] | uppercase}}</td>
+      <td>{{user['email']}}</td>
+      <td>{{user['mobile']}}</td>
+      <td>
+        <a routerLink="/users/view/{{user['id']}}" title="View" class="btn btn-info"><i class="fa fa-eye"></i></a>&nbsp;&nbsp;
+        <a routerLink="/users/edit/{{user['id']}}" title="Edit" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+        <button title="Delete" (click)="Delete(user['id'])" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">
+        <ul class="pagination pull-right">
+          <li *ngFor="let p of pagination; let i = index;let f = first;let l = last ">
+            <a href="#" [class.mr]="f" [class.ml]="l">{{p}}</a>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+<router-outlet></router-outlet>
+

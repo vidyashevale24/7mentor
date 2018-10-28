@@ -1,0 +1,8 @@
+
+<div class="form col-md-6 col-md-offset-3">
+  <div class="form-group" *ngFor="let u of user | keys">
+    <label>{{u['column'] | uppercase}}</label>
+    <div class="form-control">{{u['data']}}</div>
+  </div>
+</div>
+<div class="clearfix"></div>
